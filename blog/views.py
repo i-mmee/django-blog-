@@ -6,10 +6,5 @@ def index(request):
 
 
 def ola(request):
-    return HttpResponse('Olá, Django')
-
-# Create your views here.
-
-from django.http import HttpResponse
-
-    
+    # return HttpResponse('Olá, Django');
+    return render(request, 'home.html')
