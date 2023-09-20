@@ -17,7 +17,7 @@ def ola(request):
     return render(request, 'home.html')
 
 # na parte superior do arquivo
-from django.views.generic.detail import DetailView
+from django.views.generic import DetailView, ListView, TemplateView
 
 from blog.models import Post # Acrescentar
 def post_show(request, post_id):
@@ -98,3 +98,11 @@ def create_post(request):
         )
         response['Access-Control-Allow-Origin'] = '*'
         return response
+    
+class PostListView(ListView):
+    model = Post
+    template_name = 'post/post_list.html'
+    context_object_name = 'posts'
+
+class SobreTemplateView(TemplateView):
+    template_name = 'post/sobre.html'
