@@ -4,11 +4,10 @@ from django.urls import reverse_lazy
 from django.core.serializers.json import DjangoJSONEncoder
 from django.views.decorators.csrf import csrf_exempt
 from blog.forms import PostModelForm
-
-
-
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
+from django.contrib import messages
+
 def index(request):
     # return HttpResponse('Olá, Django - index')
     return render(request, 'index.html', {'titulo': 'Últimos Artigos'})
@@ -72,8 +71,9 @@ class PostCreateView(CreateView):
     model = Post
     template_name = 'post/post_form.html'
     #fields = ('body_text', )
-    success_url = reverse_lazy('posts_list')
+    success_url = reverse_lazy('posts_all')
     form_class = PostModelForm
+    success_message = 'Postagem salva com sucesso.'
 
 @csrf_exempt
 def create_post(request):
@@ -109,3 +109,7 @@ class PostListView(ListView):
 
 class SobreTemplateView(TemplateView):
     template_name = 'post/sobre.html'
+
+def form_valid(self, request, *args, **kwargs):
+    messages.success(self.request, self.success_message)
+    return super(PostCreateView, self).form_valid(request, *args, **kwargs)
