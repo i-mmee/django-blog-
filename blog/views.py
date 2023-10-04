@@ -7,7 +7,10 @@ from blog.forms import PostModelForm
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 
+@login_required
 def index(request):
     # return HttpResponse('Olá, Django - index')
     return render(request, 'index.html', {'titulo': 'Últimos Artigos'})
@@ -26,7 +29,7 @@ def post_show(request, post_id):
     return render(request, 'post/detail.html', {'post': post})
 
 # na parte inferior do arquivo
-class PostDetailView(DetailView):
+class PostDetailView(LoginRequiredMixin, DetailView):
     model = Post
     template_name = 'post/detail.html'
     context_object_name = 'post'
