@@ -51,6 +51,8 @@ bg-white border-bottom shadow-sm">
 
 {% if user.is_authenticated %} {# objeto user sempre está disponível nos templates #}
     <a class="p-2 text-dark" href="{% url 'logout' %}">Sair</a>
+    <a class="p-2 text-dark" href="{% url 'account_edit' pk=user.pk %}">Minha conta</a>
+
 {% else %}
     <a class="p-2 text-dark" href="{% url 'signup' %}">Cadastrar</a>
     <a class="p-2 text-dark" href="{% url 'login' %}">Acessar</a>
