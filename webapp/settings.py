@@ -145,5 +145,7 @@ MESSAGE_TAGS = {
 
 LOGIN_REDIRECT_URL = '/aimee'
 LOGOUT_REDIRECT_URL = '/aimee'
+AUTH_USER_MODEL = 'accounts.CustomUser'
+
 
 

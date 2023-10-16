@@ -1,6 +1,3 @@
-# Python
-from datetime import datetime
-# Django
 from django import forms
 # Local
 from blog.models import Post # importa o model Post
@@ -31,3 +28,14 @@ class PostModelForm(forms.ModelForm):
                 'pub_date',
                 forms.ValidationError('Não é permitido datas futuras')
         )
+
+class AccountSignupForm(forms.ModelForm):
+# (...manter tudo o que já existe…)
+    class Meta:
+        model = User
+        fields = ('username', 'email', 'data_nascimento', 'cpf', 'password', )
+        widgets = { # data personalizada a nível de formulário para exibição
+            'data_nascimento': forms.widgets.DateInput(
+                attrs={'type': 'date', 'required': 'required'}
+            ),
+        }
