@@ -2,7 +2,8 @@ from django.urls import path
 
 from blog.views import (index, ola, 
 post_show, PostDetailView,  get_all_posts, 
-get_post, PostCreateView, create_post, PostListView, SobreTemplateView, )
+get_post, PostCreateView, create_post, PostListView, SobreTemplateView, post_send,
+ )
 
 
 urlpatterns = [
@@ -20,5 +21,7 @@ urlpatterns = [
         SobreTemplateView.as_view(),
         name="about_page"
     ),
+    path('post-send/<int:post_id>', post_send, name="post_send"),
+
 
 ]
